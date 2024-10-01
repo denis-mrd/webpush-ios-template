@@ -8,6 +8,17 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-}
+  env: {
+    NEXT_PUBLIC_MAGICBELL_API_KEY: process.env.NEXT_PUBLIC_MAGICBELL_API_KEY,
+  },
+  webpack: (config, { isServer }) => {
+    // Логирование API-ключа для проверки
+    if (!isServer) {
+      console.log('MagicBell API Key:', process.env.NEXT_PUBLIC_MAGICBELL_API_KEY);
+    }
 
-module.exports = nextConfig
+    return config;
+  },
+};
+
+module.exports = nextConfig;
