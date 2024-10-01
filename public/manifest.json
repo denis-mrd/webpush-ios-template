@@ -1,11 +1,12 @@
 {
-  "name": "Web Push Test",
-  "short_name": "WebPushTest",
+  "name": "Wealth Push",
+  "short_name": "WealthPush",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#90cdf4",
   "theme_color": "#90cdf4",
   "orientation": "portrait-primary",
+  "description": "Приложение для отправки уведомлений",
   "icons": [
     {
       "src": "bell2.png",

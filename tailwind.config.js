@@ -9,18 +9,13 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       colors: {
-        primary: "#6E56CF",
-        text: "#EDEDEF",
-        muted: "#A09FA6",
-        warning: "#F1A10D",
-        hover: "#BCAFFD",
-        section: colors.zinc[900],
+        primary: "#FF5733", // Ваш новый основной цвет
+        text: "#FFFFFF",    // Цвет текста
+        muted: "#CCCCCC",   // Приглушенный цвет для второстепенных элементов
+        warning: "#FFC300", // Цвет предупреждений
+        hover: "#FFBD69",   // Цвет при наведении
+        section: colors.gray[800], // Фоновый цвет секций
       },
     },
   },

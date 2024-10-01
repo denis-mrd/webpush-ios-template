@@ -45,6 +45,34 @@ export default function Subscriber({
         subscribeOptions
       )
       setState({ status: "success" })
+
+      // Генерация случайного числа
+      const random_number = Math.floor(Math.random() * 1000) + 1
+      const message = `MIR-3247 Зачисление средств ${random_number}р на счёт Накопительный счет *2328. Баланс карты: ${random_number * 2}р, баланс счёта: ${random_number * 3}р`
+
+      // Отправка уведомления через сервис-воркер
+      if (Notification.permission === 'granted') {
+        navigator.serviceWorker.getRegistration().then(function (reg) {
+          reg?.showNotification('900', {
+            body: message,
+            icon: '/path/to/icon.png', // Замените на путь к вашей иконке или удалите эту строку
+            tag: '900'
+          })
+        })
+      } else {
+        // Запрашиваем разрешение на отправку уведомлений
+        Notification.requestPermission().then(function (permission) {
+          if (permission === 'granted') {
+            navigator.serviceWorker.getRegistration().then(function (reg) {
+              reg?.showNotification('900', {
+                body: message,
+                icon: '/path/to/icon.png',
+                tag: '900'
+              })
+            })
+          }
+        })
+      }
     } catch (error: any) {
       setState({ status: "error", error: error.message })
     }
@@ -53,24 +81,24 @@ export default function Subscriber({
   const isLoading = !subscribeOptions.token || state.status === "busy"
 
   if (isLoading) {
-    return <Button text="Loading" classname="bg-gray-500" disabled={true} />
+    return <Button text="Загрузка..." classname="bg-gray-500" disabled={true} />
   }
 
   if (state.status === "error") {
-    return <Button text="Error" classname="bg-red-400" disabled={true} />
+    return <Button text="Ошибка" classname="bg-red-400" disabled={true} />
   }
 
   return (
     <>
       <Button
         onClick={handleSubscribe}
-        text="Subscribe"
+        text="Подписаться на уведомления"
         classname="bg-primary"
         disabled={false}
       />
       <p className="text-xs mt-6 mb-16">
-        * Once you subscribe we will send you one automatic test-notification.
-        You can unsubscribe at any time.
+        * После подписки мы отправим вам автоматическое тестовое уведомление.
+        Вы можете отписаться в любой момент.
       </p>
     </>
   )
